@@ -195,6 +195,31 @@ pre.code {
 .explain h3 { font: 700 15px/1.4 var(--body); margin: 12px 0 2px; color: var(--ink-soft); }
 .explain p { margin: 0; }
 
+/* 그림 설명 */
+.lesson { margin-bottom: 8px; }
+.lhead { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.lstage { min-height: 150px; display: grid; gap: 12px; align-content: center; padding: 14px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 3px; overflow-x: auto; }
+.llabel { font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
+.lcells { display: flex; gap: 6px; flex-wrap: wrap; }
+.lcell {
+  min-width: 40px; min-height: 40px; padding: 7px 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--sheet); border: 1.5px solid var(--ink-soft); border-radius: 3px;
+  font-variant-numeric: tabular-nums; font-weight: 600; text-align: center;
+  transition: background 0.25s, border-color 0.25s;
+}
+.lcell.on { background: var(--marker); border-color: var(--ink); }
+.lcell.ok { background: #dcefe3; border-color: var(--ok); color: var(--ok); }
+.lcell.bad { background: #f6dcd8; border-color: var(--stamp); color: var(--stamp); }
+.lcell.dim { opacity: 0.4; }
+.lcell.gap { border-color: transparent; background: transparent; }
+.lsay { margin: 14px 0 0; font-size: 18px; min-height: 3.3em; }
+.ldots { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 14px; }
+.ldots button { width: 22px; height: 8px; padding: 0; border: 1px solid var(--ink-soft); border-radius: 2px; background: transparent; }
+.ldots button.done { background: var(--bar); }
+.ldots button.on { background: var(--stamp); border-color: var(--stamp); }
+.lesson-link { margin-left: 12px; padding: 3px 10px; font-size: 14px; }
+
 /* 오답노트 · 개념 */
 .note-item { margin-bottom: 14px; }
 .note-item .qtext { font-size: 16px; margin-bottom: 8px; }
@@ -230,5 +255,7 @@ footer.src a { margin-right: 12px; }
   .notice > span:last-child { grid-column: 1 / -1; }
   .subject-row { grid-template-columns: 1fr auto; }
   .subject-row .prog { grid-column: 1; grid-row: 2; }
+  .lcell { min-width: 32px; min-height: 36px; padding: 5px 7px; font-size: 15px; }
+  .lsay { font-size: 17px; }
   .stamp { width: 62px; height: 62px; font-size: 17px; line-height: 56px; top: 10px; right: 10px; }
 }
