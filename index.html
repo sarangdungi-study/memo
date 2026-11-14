@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>메모</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .gate { max-width: 300px; margin: 22vh auto 0; padding: 0 20px; display: grid; gap: 10px; }
+    .gate input { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 3px; background: var(--sheet); color: var(--ink); }
+    .gate p { margin: 0; min-height: 1.6em; font-size: 14px; color: var(--ink-soft); }
+  </style>
+</head>
+<body>
+  <form class="gate" id="gate" autocomplete="off">
+    <input id="uid" placeholder="아이디" aria-label="아이디" required>
+    <input id="pw" type="password" placeholder="비밀번호" aria-label="비밀번호" inputmode="numeric" required>
+    <button class="btn fill" type="submit">열기</button>
+    <p id="msg"></p>
+  </form>
+  <script src="p.js"></script>
+  <script>
+    const SAVED = 'memo-login';
+    const bytes = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+
+    async function unlock(id, pw) {
+      const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+      const key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: bytes(P.s), iterations: P.n, hash: 'SHA-256' },
+        material, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(P.i) }, key, bytes(P.c));
+      globalThis.GOV_USER = id;
+      new Function(new TextDecoder().decode(plain))();
+    }
+
+    function remember(id, pw) {
+      try { localStorage.setItem(SAVED, JSON.stringify({ id, pw })); } catch { /* 저장이 막혀 있으면 매번 입력 */ }
+    }
+
+    document.getElementById('gate').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('uid').value.trim();
+      const pw = document.getElementById('pw').value;
+      try {
+        await unlock(id, pw);
+        remember(id, pw);
+      } catch {
+        document.getElementById('msg').textContent = '맞지 않아요.';
+      }
+    });
+
+    (async () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem(SAVED));
+        if (saved) await unlock(saved.id, saved.pw);
+      } catch { /* 저장된 값이 없거나 틀리면 대문을 그대로 둔다 */ }
+    })();
+  </script>
+</body>
+</html>
