@@ -238,6 +238,14 @@ pre.code {
 .hevent.open { border-color: var(--line-strong); }
 .hevent .explain { margin: 0; padding: 12px 16px 16px; }
 
+/* 모의고사 */
+.mock-top { position: sticky; top: 62px; z-index: 4; display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; margin-bottom: 14px; background: var(--ink); color: var(--sheet); border-radius: 3px; }
+.mock-time { font-variant-numeric: tabular-nums; font-size: 19px; }
+.mock-q { margin-bottom: 14px; }
+.mock-bars { display: flex; gap: 10px; align-items: flex-end; min-height: 140px; overflow-x: auto; padding-top: 6px; }
+.mock-bar { display: grid; justify-items: center; gap: 3px; }
+.mock-bar .bar { width: 22px; }
+
 /* 오답노트 · 개념 */
 .note-item { margin-bottom: 14px; }
 .note-item .qtext { font-size: 16px; margin-bottom: 8px; }
