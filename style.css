@@ -155,6 +155,7 @@ ol.steps { margin: 0; padding-left: 22px; }
 .qcard { position: relative; }
 .qmeta { font-size: 14px; color: var(--ink-soft); margin-bottom: 8px; }
 .qtext { white-space: pre-line; font-size: 18px; margin: 0 0 14px; }
+.qimg { display: block; width: 100%; max-width: 660px; height: auto; margin: 0 0 14px; border: 1px solid var(--ink-soft); border-radius: 6px; background: #fff; }
 .qtable { border-collapse: collapse; margin: 0 0 14px; font-variant-numeric: tabular-nums; }
 .qtable th, .qtable td { border: 1px solid var(--ink-soft); padding: 6px 16px; text-align: center; }
 .qtable th { background: var(--paper); font-weight: 600; }
