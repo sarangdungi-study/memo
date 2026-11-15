@@ -137,8 +137,10 @@ a.track:hover { background: var(--sheet); }
 ol.steps { margin: 0; padding-left: 22px; }
 
 /* 문제 풀기 */
-.strip { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 18px; }
+.strip { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; margin: 6px 0 18px; padding: 5px 4px 8px; -webkit-overflow-scrolling: touch; }
+.striphead { font-size: 14px; color: var(--ink-soft); margin: 14px 0 0; }
 .strip button {
+  flex: 0 0 auto;
   width: 36px; height: 36px;
   border: 1px solid var(--line-strong);
   border-radius: 3px;
